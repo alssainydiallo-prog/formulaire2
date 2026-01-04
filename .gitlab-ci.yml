@@ -1,0 +1,15 @@
+# Utiliser l'image Node.js LTS
+image: node:lts
+
+# Job pour construire et publier les Pages
+pages:
+  stage: deploy
+  script:
+    - echo "Publier le site GitLab Pages"
+    # Ici, si tu avais un build (React, Vue, etc.) tu ferais `npm ci` puis `npm run build`
+    # Mais ton projet est juste HTML/CSS/JS, donc aucun build n'est nécessaire
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
