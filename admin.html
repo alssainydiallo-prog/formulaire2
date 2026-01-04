@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration Complète</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<h2>🛠️ Administration des Inscrits</h2>
+<button id="logout">Déconnexion</button>
+<input type="text" id="searchInput" placeholder="Rechercher par nom, prénom, commission, ufr, filière, type, email...">
+<button id="exportPDF">Exporter PDF</button>
+<div id="stats" style="margin: 10px 0; font-weight:bold;"></div>
+
+<table border="1">
+<thead>
+<tr>
+<th>Nom</th>
+<th>Prénom</th>
+<th>Téléphone</th>
+<th>Adresse</th>
+<th>Email</th>
+<th>Type</th>
+<th>Commission</th>
+<th>Détails Complètes</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="inscritsTable"></tbody>
+</table>
+
+<script src="admin.js"></script>
+</body>
+</html>

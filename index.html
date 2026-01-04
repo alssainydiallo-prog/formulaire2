@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulaire d'inscription</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <img src="a.jpeg" class="admin-avatar" alt="Admin">
+  <h2>🔐 Connexion Administrateur</h2>
+  <form id="adminLoginForm">
+    <input type="text" id="adminUser" placeholder="Administrateur" required>
+    <input type="password" id="adminPass" placeholder="Mot de passe" required>
+    <button type="submit">Connexion</button>
+  </form>
+</header>
+
+<main class="container">
+  <form id="registrationForm">
+    <h2>📝 Formulaire d'inscription</h2>
+
+    <label>Nom</label>
+    <input id="nom" required>
+    <label>Prénom</label>
+    <input id="prenom" required>
+    <label>Téléphone</label>
+    <input id="telephone" required>
+    <label>Adresse</label>
+    <input id="adresse" required>
+    <label>Email</label>
+    <input type="email" id="email" required>
+
+    <label>Type</label>
+    <select id="type" required>
+      <option value="">-- Choisir --</option>
+      <option value="etudiant">Étudiant</option>
+      <option value="eleve">Élève</option>
+      <option value="ancien">Ancien</option>
+    </select>
+
+    <label>Commission</label>
+    <select id="commission" required>
+      <option value="">-- Choisir --</option>
+      <option>Da'awa</option>
+      <option>Finance</option>
+      <option>Organisation et Social</option>
+      <option>Pédagogique</option>
+      <option>Communication, Information & Audiovisuelle</option>
+      <option>Secrétariat Général</option>
+      <option>Aucune</option>
+    </select>
+
+    <!-- ÉTUDIANT -->
+    <div id="etudiantFields" class="hidden">
+      <label>Université</label><input id="etu_univ">
+      <label>UFR</label><input id="etu_ufr">
+      <label>Niveau</label>
+      <select id="etu_niveau">
+        <option>L1</option><option>L2</option><option>L3</option>
+        <option>M1</option><option>M2</option><option>Doctorat</option>
+      </select>
+      <label>Filière</label><input id="etu_filiere">
+      <label>Logement</label><input id="etu_logement">
+    </div>
+
+    <!-- ÉLÈVE -->
+    <div id="eleveFields" class="hidden">
+      <label>Établissement</label><input id="el_etab">
+      <label>Niveau</label><input id="el_niveau">
+    </div>
+
+    <!-- ANCIEN -->
+    <div id="ancienFields" class="hidden">
+      <label>Université</label><input id="an_univ">
+      <label>UFR</label><input id="an_ufr">
+      <label>Promotion</label><input id="an_prom">
+      <label>Filière</label><input id="an_fill">
+      <label>Profession</label><input id="an_prof">
+    </div>
+
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <!-- ===== MESSAGE DE SUCCESS / ERREUR ===== -->
+  <div id="successMessage" style="display:none; margin-top:15px; padding:12px; border-radius:5px; font-weight:bold;">
+    <span id="msgText"></span>
+    <span id="closeMsg" style="float:right; cursor:pointer;">✖</span>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
