@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Utiliser l'image Node.js LTS
 image: node:lts
 
@@ -13,3 +14,15 @@ pages:
       - public
   only:
     - main
+=======
+# The Docker image that will be used to build your app
+image: node:lts
+create-pages:
+  pages:
+    # The folder that contains the files to be exposed at the Page URL
+    publish: public
+  rules:
+    # This ensures that only pushes to the default branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+>>>>>>> cb18537202cb80c9ff70ed7ae0da8131cf646626
