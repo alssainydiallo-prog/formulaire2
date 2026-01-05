@@ -1,23 +1,22 @@
-// server.js
 const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
-const path = require("path");
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Railway fournit le PORT automatiquement
+const PORT = process.env.PORT || 3000;
 
-// ===== Middleware =====
-app.use(express.static(path.join(__dirname, "public"))); // sert index.html, admin.html et tous les fichiers public
+// Middleware
+app.use(cors()); // Pour que toutes les origines puissent accéder à l'API
+app.use(express.static("public")); // index.html, admin.html, JS, CSS
 app.use(bodyParser.json());
 
-// ===== Gestion des données =====
 const DATA_FILE = "data.json";
 
 // Lire les inscrits
 function readData() {
   if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, "[]");
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+  return JSON.parse(fs.readFileSync(DATA_FILE));
 }
 
 // Écrire les inscrits
@@ -25,53 +24,39 @@ function writeData(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// ===== Routes API =====
-// GET /api/inscrits → récupérer tous les inscrits
+// --- Routes API ---
+
+// Récupérer tous les inscrits
 app.get("/api/inscrits", (req, res) => {
   res.json(readData());
 });
 
-// POST /api/inscrits → ajouter un inscrit avec vérification doublon
+// Ajouter un inscrit
 app.post("/api/inscrits", (req, res) => {
   const newInscrit = req.body;
   const data = readData();
 
-  // Vérifier doublon (email ou téléphone)
+  // Vérifier doublon par email ou téléphone
   const doublon = data.find(
     i => i.email === newInscrit.email || i.telephone === newInscrit.telephone
   );
-
-  if (doublon) {
-    return res.status(400).json({ message: "Inscription déjà existante (email ou téléphone) !" });
-  }
+  if (doublon) return res.status(400).json({ message: "Inscription déjà existante !" });
 
   data.push(newInscrit);
   writeData(data);
-  res.status(200).json({ message: "Inscrit ajouté avec succès !" });
+  res.json({ message: "Inscrit ajouté avec succès !" });
 });
 
-// DELETE /api/inscrits/:index → supprimer un inscrit
+// Supprimer un inscrit
 app.delete("/api/inscrits/:index", (req, res) => {
   const index = parseInt(req.params.index);
   const data = readData();
-
   if (index >= 0 && index < data.length) {
     data.splice(index, 1);
     writeData(data);
-    res.status(200).json({ message: "Inscrit supprimé !" });
-  } else {
-    res.status(404).json({ message: "Index non trouvé" });
-  }
+    res.json({ message: "Inscrit supprimé !" });
+  } else res.status(404).json({ message: "Index non trouvé" });
 });
 
-// ===== CORS (pour accès depuis n'importe quelle origine) =====
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // autorise toutes les origines
-  res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  if (req.method === "OPTIONS") return res.sendStatus(200);
-  next();
-});
-
-// ===== Lancement du serveur =====
-app.listen(PORT, () => console.log(`Serveur lancé sur le port ${PORT}`));
+// Lancer le serveur
+app.listen(PORT, "0.0.0.0", () => console.log(`Serveur lancé sur le port ${PORT}`));
