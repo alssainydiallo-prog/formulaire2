@@ -2,9 +2,10 @@ const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(".")); // Sert index.html et admin.html
+
+app.use(express.static("public")); // Sert index.html et admin.html
 app.use(bodyParser.json());   // Permet de lire req.body en JSON
 
 const DATA_FILE = "data.json";

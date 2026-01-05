@@ -102,7 +102,7 @@ if (adminForm) {
     e.preventDefault();
     const user = document.getElementById("adminUser").value.trim();
     const pass = document.getElementById("adminPass").value.trim();
-    if (user === "admin" && pass === "1234") {
+    if (user === "secretariat" && pass === "di@llo08") {
       window.location.href = "/admin.html";
     } else {
       showMessage("Utilisateur ou mot de passe incorrect !", false);

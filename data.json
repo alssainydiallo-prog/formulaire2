@@ -25,5 +25,32 @@
       "fill": "",
       "prof": ""
     }
+  },
+  {
+    "nom": "diallo",
+    "prenom": "Alssainy",
+    "telephone": "77535089",
+    "adresse": "kaolock",
+    "email": "balzacdiallo12@hotmail.com",
+    "type": "etudiant",
+    "commission": "Secrétariat Général",
+    "etudiant": {
+      "univ": "Iba DER Thiam",
+      "ufr": "SET",
+      "niveau": "L2",
+      "filiere": "Informatique",
+      "logement": "VCN"
+    },
+    "eleve": {
+      "etab": "",
+      "niveau": ""
+    },
+    "ancien": {
+      "univ": "",
+      "ufr": "",
+      "prom": "",
+      "fill": "",
+      "prof": ""
+    }
   }
 ]
